@@ -8,7 +8,7 @@
     var defaults = {
         el             : '',                 // The container element or selector.
         effect         : 'none',             // The switch effect, 'none' or 'slide' supported.
-        duration       : 400,                // The effect duration.
+        duration       : 350,                // The effect duration.
         startAt        : 0,                  // The index (zero-based) which is set the initial step.
         showCancel     : true,               // Whether to show the "cancel" button.
         showPrev       : true,               // Whether to show the "previous" button, which is hidden on the first step.
@@ -232,7 +232,7 @@
                         .animate({
                             left: 0
                         }, self.opts.duration, function() {
-                            $activeBody.hide();
+                            sequenceMap[self.sequence].$el.hide();
                             self.activeClass($activeHeader, $activeBody);
                         });
 
