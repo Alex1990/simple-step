@@ -1,0 +1,21 @@
+{
+  "camelcase": true,
+  "eqeqeq": true,
+  "curly": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "quotmark": "single",
+  "undef": true,
+  "unused": "vars",
+  "trailing": true,
+
+  "boss": true,
+  "eqnull": true,
+  "expr": true,
+
+  "node": true,
+  "browser": true,
+  "jquery": true
+}
