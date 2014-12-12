@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Start at</title>
+    <style>
+        body {
+            margin: 0;
+            font: 100% sans-serif;
+        }
+        .cf:after {
+            content: ' ';
+            height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both;
+        }
+        .cf {
+            zoom: 1;
+        }
+        .step-wrapper {
+            width: 600px;
+        }
+        .step-wrapper .step-header {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .step-wrapper .step-header-item {
+            float: left;
+            padding: 10px 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #666;
+        }
+        .step-wrapper .step-header .activated {
+            color: #000;
+        }
+        .step-wrapper .step-header .active {
+            color: #0af;
+        }
+        .step-wrapper .step-body .step-body-item {
+            display: none;
+            height: 300px;
+            padding: 20px;
+        }
+        .step-wrapper .step-body .active {
+            display: block;
+        }
+        .step-wrapper .step-footer {
+            padding: 20px 15px 20px 0;
+            text-align: right;
+            background-color: #f4f4f4;
+            cursor: default;
+        }
+        .step-wrapper .step-footer .step-btn {
+            display: inline-block;
+            margin-right: 5px;
+            height: 30px;
+            padding: 0 15px;
+            font-size: 16px;
+            line-height: 30px;
+            text-decoration: none;
+            background-color: #fafafa;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+        .step-wrapper .step-footer .step-btn:hover {
+            color: #000;
+            border-color: #d0d0d0;
+            box-shadow: 0 1px 2px -1px #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="brand-step" class="step-wrapper">
+        <ul class="step-header cf">
+            <li class="step-header-item active" data-body="#step1">First</li>
+            <li class="step-header-item" data-body="#step2">Second</li>
+            <li class="step-header-item" data-body="#step3">Third</li>
+        </ul>
+        <div class="step-body">
+            <div id="step1" class="step-body-item active">
+                <p>This is the first.</p>
+            </div>
+            <div id="step2" class="step-body-item">
+                <p>This is the second.</p>
+            </div>
+            <div id="step3" class="step-body-item">
+                <p>This is the third.</p>
+            </div>
+        </div>
+        <div class="step-footer">
+            <a href="javascript:void(0)" class="step-btn step-cancel">Cancel</a>
+            <a href="javascript:void(0)" class="step-btn step-prev">Previous</a>
+            <a href="javascript:void(0)" class="step-btn step-next">Next</a>
+            <a href="javascript:void(0)" class="step-btn step-finish">Finish</a>
+        </div>
+    </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../src/step.js"></script>
+    <script>
+    $(function(){
+        $('#brand-step').step({
+            startAt: 1 // zero-based
+        });
+    });
+    </script>
+</body>
+</html>
