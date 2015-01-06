@@ -7,21 +7,21 @@
     // Default settings.
     var defaults = {
         el             : '',                 // The container element or selector.
-        effect         : 'none',             // The switch effect, 'none' or 'slide' supported.
+        effect         : 'none',             // The switch effect, 'none' and 'slide' are supported.
         duration       : 350,                // The effect duration.
-        startAt        : 0,                  // The index (zero-based) which is set the initial step.
-        showCancel     : true,               // Whether to show the "cancel" button.
-        showPrev       : true,               // Whether to show the "previous" button, which is hidden on the first step.
-        showNext       : true,               // Whether to show the "next" button, which is hidden on the last step.
-        showFinish     : false,              // Whether to show the "finish" button on every step.
-        activatedCls   : 'activated',        // The previous displayed steps.
+        startAt        : 0,                  // The index (zero-based) of the initial step.
+        showCancel     : true,               // Whether to show the "Cancel" button.
+        showPrev       : true,               // Whether to show the "Previous" button, which is hidden on the first step.
+        showNext       : true,               // Whether to show the "Next" button, which is hidden on the last step.
+        showFinish     : false,              // Whether to show the "Finish" button on every step.
         activeCls      : 'active',           // The current step.
-        onprev         : function(index) {}, // When switch to the previous step, this callback will be called.
-        onnext         : function(index) {}, // When switch to the next step, this callback will be called.
-        oncancel       : function(index) {}, // When trigger the "cancel" button, this callback will be called.
-        onfinish       : function(index) {}, // When trigger the "finish" button, this callback will be called.
-        onbeforeprev   : function(index) {}, // This callback will be called before switching to the previous step.
-        onbeforenext   : function(index) {}  // This callback will be called before switching to the next step.
+        activatedCls   : 'activated',        // The steps in front of the current step.
+        onprev         : $.noop,               // After switching to the previous step, this callback will be called.
+        onnext         : $.noop,               // After switching to the next step, this callback will be called.
+        oncancel       : $.noop,               // When trigger the "Cancel" button, this callback will be called.
+        onfinish       : $.noop,               // When trigger the "Finsh" button, this callback will be called.
+        onbeforeprev   : $.noop,               // This callback will be called before switching to the previous step.
+        onbeforenext   : $.noop                // This callback will be called before switching to the next step.
     };
 
     // The `Step` constructor.
@@ -101,7 +101,7 @@
         },
 
         // Skip to the index (zero-based) step.
-        gotoStep: function(index) {
+        gotoStep: function(index, callback) {
 
             this.index = index;
 
@@ -133,7 +133,7 @@
                 });
             }
 
-            this.effectExecutors[effect].call(this, $activeHeader, $activeBody);
+            this.effectExecutors[effect].call(this, $activeHeader, $activeBody, callback);
 
             var btns = this.btns;
 
@@ -162,9 +162,8 @@
             if (this.index > 0) {
                 this.index--;
                 this.sequence = 'prev';
-                this.gotoStep(this.index);
+                this.gotoStep(this.index, this.opts.onprev);
             }
-            this.opts.onprev.call(this, this.index);
         },
 
         // Skip to the next step.
@@ -172,9 +171,8 @@
             if (this.index < this.totalCount - 1) {
                 this.index++;
                 this.sequence = 'next';
-                this.gotoStep(this.index);
+                this.gotoStep(this.index, this.opts.onnext);
             }
-            this.opts.onnext.call(this, this.index);
         },
 
         // Cancel the step.
@@ -207,12 +205,13 @@
         effectExecutors: {
 
             // None effect.
-            none: function($activeHeader, $activeBody) {
+            none: function($activeHeader, $activeBody, callback) {
                 this.activeClass($activeHeader, $activeBody);
+                callback && callback.call(this, this.index);
             },
 
             // Slide horizontally.
-            slide: function($activeHeader, $activeBody) {
+            slide: function($activeHeader, $activeBody, callback) {
                 var self = this,
                     sequenceMap = {
                         prev: {
@@ -225,21 +224,22 @@
                         }
                     };
 
-                    $activeBody.css({
-                            left: sequenceMap[self.sequence].left
-                        })
-                        .show()
-                        .animate({
-                            left: 0
-                        }, self.opts.duration, function() {
-                            sequenceMap[self.sequence].$el.hide();
-                            self.activeClass($activeHeader, $activeBody);
-                        });
+                $activeBody.css({
+                        left: sequenceMap[self.sequence].left
+                    })
+                    .show()
+                    .animate({
+                        left: 0
+                    }, self.opts.duration, function() {
+                        sequenceMap[self.sequence].$el.hide();
+                        self.activeClass($activeHeader, $activeBody);
+                        callback && callback.call(self, self.index);
+                    });
 
-                    sequenceMap[self.sequence].$el
-                        .animate({
-                            left: -sequenceMap[self.sequence].left
-                        }, self.opts.duration);
+                sequenceMap[self.sequence].$el
+                    .animate({
+                        left: -sequenceMap[self.sequence].left
+                    }, self.opts.duration);
             }
         }
     });
