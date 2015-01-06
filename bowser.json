@@ -1,0 +1,24 @@
+{
+  "name": "simple-step",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Alex1990/simple-step",
+  "authors": [
+    "Alex Chao <alexchao1990#gmail.com>"
+  ],
+  "description": "A simple jquery plugin to show a step-by-step layer",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "step"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "**/*.log"
+  ]
+}
