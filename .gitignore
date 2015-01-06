@@ -1,3 +1,4 @@
 node_modules/
 *.log
 .grunt
+bower_components

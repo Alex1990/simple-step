@@ -1,6 +1,6 @@
 /**
- * step
- * https://github.com/Alex1990/overlay
+ * simple-step
+ * https://github.com/Alex1990/simple-step
  *
  * Copyright (c) 2014 Alex Chao
  * Licensed under the MIT license.

@@ -15,7 +15,6 @@
   "eqnull": true,
   "expr": true,
 
-  "node": true,
   "browser": true,
   "jquery": true
 }
