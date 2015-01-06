@@ -1,6 +1,6 @@
 /*!
  * simple-step
- * http://alex1990.github.com/simple-step
+ * https://github.com/Alex1990/simple-step
 */
 ;(function($) {
 
