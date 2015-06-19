@@ -1,7 +1,8 @@
 {
   "name": "simple-step",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A simple jquery plugin to show a step-by-step layer",
+  "main": "src/step.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
