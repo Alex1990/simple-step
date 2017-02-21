@@ -86,18 +86,13 @@
                     self.finish();
                 })
                 .delegate('.step-footer .step-prev', 'click', function(){
-                    self.opts.onbeforeprev.call(this, this.index);
+                    self.opts.onbeforeprev.call(self, self.index);
                     self.prevEnabled && self.prev();
                 })
                 .delegate('.step-footer .step-next', 'click', function(){
-                    self.opts.onbeforenext.call(this, this.index);
+                    self.opts.onbeforenext.call(self, self.index);
                     self.nextEnabled && self.next();
                 });
-        },
-
-        // Return the index of the current step.
-        index: function() {
-            return this.index;
         },
 
         // Skip to the index (zero-based) step.
